@@ -25,10 +25,13 @@ if __name__ == '__main__':
         IN_DIR = sys.argv[1]
         if not os.path.exists(IN_DIR):
             print(IN_DIR, " does not exist")
-            sys.exit()
+            sys.exit(1)
         if not os.path.isdir(IN_DIR):
             print(IN_DIR, ' is not a directory')
-            sys.exit()
+            sys.exit(1)
+    else:
+        print("The input images directory required as first argument")
+        sys.exit(1)
     if len(sys.argv) > 2:
         OUT_DIR = sys.argv[2]
         if not os.path.exists(OUT_DIR):
