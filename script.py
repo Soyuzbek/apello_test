@@ -16,7 +16,8 @@ def image_handle(input, output):
             width, height = im.size
             firstname, lastname, ext = re.split(r'[-.]', file)
             img_draw = ImageDraw.Draw(im)
-            img_draw.text((width - 200, height - 50), f'{COPYRIGHT} {firstname.capitalize()} {lastname.capitalize()}', (255, 255, 255), font)
+            img_draw.text((width - 200, height - 50), f'{COPYRIGHT} {firstname.capitalize()} {lastname.capitalize()}',
+                          (255, 255, 255), font)
             im.save(os.path.join(output, file))
 
 
