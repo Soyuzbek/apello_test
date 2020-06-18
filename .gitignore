@@ -130,3 +130,6 @@ dmypy.json
 
 # Jetrbrains
 .idea/
+
+# local files
+output-images/
