@@ -1,24 +1,25 @@
 #!/usr/bin/python
 import os
 import sys
-import re
 from PIL import Image, ImageDraw, ImageFont
-OUT_DIR = '.\\output-images'
-IN_DIR = '.\\input-images'
-COPYRIGHT = u'\u00A9'
 
 
-def image_handle(input, output):
-    font = ImageFont.truetype('arial', 24)
-    for file in os.listdir(input):
+OUT_DIR = os.path.join('.', 'output-images')
+IN_DIR = os.path.join('.', 'input-images')
+
+
+def image_handle(input_dir, output_dir):
+    font = ImageFont.truetype('arial', 32)
+    for file in os.listdir(input_dir):
         if file.endswith(".jpg"):
-            im = Image.open(os.path.join(input, file))
+            im = Image.open(os.path.join(input_dir, file))
             width, height = im.size
-            firstname, lastname, ext = re.split(r'[-.]', file)
+            first_name, last_name = file[:-4].split('-')
             img_draw = ImageDraw.Draw(im)
-            img_draw.text((width - 200, height - 50), f'{COPYRIGHT} {firstname.capitalize()} {lastname.capitalize()}',
-                          (255, 255, 255), font)
-            im.save(os.path.join(output, file))
+            sign = f'\N{COPYRIGHT SIGN}{first_name.capitalize()} {last_name.capitalize()}'
+            sign_width, sign_height = img_draw.textsize(sign, font)
+            img_draw.text((width - sign_width - 20, height - sign_height - 15), sign, (255, 255, 255), font)
+            im.save(os.path.join(output_dir, file))
 
 
 if __name__ == '__main__':
